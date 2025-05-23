@@ -8,6 +8,8 @@ ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 
 bet_amount = 0
 value = 0
 dealer_value = 0
+your_hand = []
+dealer_hand = []
 
 def get_money():
     global money
@@ -24,8 +26,10 @@ def get_money():
 def start_game():
     global deck, hand, dealer_hand, value, dealer_value
     deck = Deck()
-    hand = []
-    dealer_hand = []
+    while i > 2:   
+        hand.append(deck.draw_cards) '
+        deale.append(deck.draw_cards)
+        i++
     value = 0
     dealer_value = 0
     print("Game started. You can draw cards now.")
