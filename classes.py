@@ -20,7 +20,8 @@ class Deck:
         self.cards = [Card(suit, rank) for x in range(int(num_decks)) for suit in suits for rank in ranks]
         random.shuffle(self.cards)
         self.card_count = 0
-
+    def shuffle(self):
+        random.shuffle(self.cards)
     def draw_card(self):
         if not self.cards:
             return None
@@ -50,3 +51,6 @@ class Hand:
 
     def __str__(self):
         return ', '.join(str(card) for card in self.cards)
+
+    def __iter__(self):
+        return iter(self.cards)
