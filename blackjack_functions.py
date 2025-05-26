@@ -1,4 +1,3 @@
-
 import random
 import classes
 from classes import Deck, Card
@@ -8,8 +7,9 @@ ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 
 bet_amount = 0
 value = 0
 dealer_value = 0
-your_hand = []
-dealer_hand = []
+card_count = 0
+your_hand = Hand()
+dealer_hand = Hand()
 
 def get_money():
     global money
@@ -23,38 +23,17 @@ def get_money():
         except ValueError:
             print("Invalid input. Please enter a number.")
 
-def start_game():
-    global deck, hand, dealer_hand, value, dealer_value
-    deck = Deck()
-    while i > 2:   
-        hand.append(deck.draw_cards) '
-        deale.append(deck.draw_cards)
-        i++
-    value = 0
-    dealer_value = 0
-    print("Game started. You can draw cards now.")
-
-def draw_card():
-    global value
-    card = random.choice(ranks)
-    if card in ['jack', 'queen', 'king']:
-        value += 10
-    elif card == 'ace':
-        value += 11
-    else:
-        value += int(card)
-    print(f"Drew card: {card}. Current hand value: {value}")
-
 def reset_deck():
     global deck
     deck = Deck()
     print("Deck reset. New cards are available.")
 
 def reset_game():
-    global value, dealer_value, bet_amount
+    global value, dealer_value, bet_amount, card_count
     value = 0
     dealer_value = 0
     bet_amount = 0
+    card_count = 0
     reset_deck()
     print("Game reset. You can place a new bet.")
 
@@ -72,10 +51,10 @@ def place_bet():
         except ValueError:
             print("Invalid input. Please enter a number.")
 
-def get_hand_value(hand):
+def get_hand_value(your_hand):
     value = 0
     aces = 0
-    for card in hand:
+    for card in your_hand:
         if card.rank in ['jack', 'queen', 'king']:
             value += 10
         elif card.rank == 'ace':
@@ -89,12 +68,13 @@ def get_hand_value(hand):
     return value
 
 def hit():
-    if get_hand_value(hand) == 21:
+    your_hand.draw()
+    if get_hand_value(your_handhand) == 21:
         print("Blackjack!")
         bet_amount *= 2
         money += bet_amount
         print(f"You won! Your new balance is {money}.")
-    elif get_hand_value(hand) > 21:
+    elif get_hand_value(your_hand) > 21:
         print("Bust! You lose your bet.")
         money -= bet_amount
         print(f"Your new balance is {money}.")
@@ -130,9 +110,9 @@ def double_down():
         print("Not enough money to double down.")
 
 def split():
-    global hand, bet_amount
-    if len(hand) == 2 and hand[0].rank == hand[1].rank:
-        new_hand = [hand.pop()]
+    global your_hand, bet_amount
+    if len(your_hand) == 2 and your_hand[0].rank == your_hand[1].rank:
+        new_hand = [your_hand.pop()]
         new_bet = bet_amount // 2
         if new_bet <= money:
             bet_amount = new_bet
@@ -143,3 +123,7 @@ def split():
             print("Not enough money to split.")
     else:
         print("Cannot split. You need two cards of the same rank.")
+
+
+    
+
