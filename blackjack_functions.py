@@ -1,6 +1,6 @@
 import random
 import classes
-from classes import Deck, Card
+from classes import Deck, Card, Hand
 money = 1000
 suits = ['hearts', 'diamonds', 'spades', 'clubs']
 ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace']

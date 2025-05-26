@@ -14,9 +14,10 @@ class Card:
 
 class Deck:
     def __init__(self):
-        input = print("How many decks do you want to use?")
-        num_decks = int(input())
-        self.cards = [Card(suit, rank) for x in range(num_decks) for suit in suits for rank in ranks]
+        num_decks = input("Enter the number of decks to use (default 1): ") or 1
+        if not num_decks.isdigit() or int(num_decks) < 1:
+            num_decks = 1
+        self.cards = [Card(suit, rank) for x in range(int(num_decks)) for suit in suits for rank in ranks]
         random.shuffle(self.cards)
         self.card_count = 0
 
