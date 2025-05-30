@@ -13,8 +13,8 @@ class Card:
         return f"{self.rank} of {self.suit}"
 
 class Deck:
-    def __init__(self):
-        num_decks = input("Enter the number of decks to use (default 1): ") or 1
+    def __init__(self, num_decks):
+        self.num_decks = num_decks
         if not num_decks.isdigit() or int(num_decks) < 1:
             num_decks = 1
         self.cards = [Card(suit, rank) for x in range(int(num_decks)) for suit in suits for rank in ranks]
