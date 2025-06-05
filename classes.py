@@ -43,11 +43,16 @@ class Deck:
 
 
 class Hand:
-    def __init__(self):
-        self.cards = []
+    def __init__(self, initial_cards=None): # Add initial_cards parameter with a default of None
+        if initial_cards is None:
+            self.cards = []
+        else:
+            self.cards = list(initial_cards) # Ensure it's a list if a non-list iterable is passed
 
     def draw(self, deck):
         card = deck.draw_card()
+        # Ensure update_count is properly handled here, assuming it's part of your Deck logic
+        # You might need to adjust how deck._update_count is called based on your Deck class
         update_count = deck._update_count(card)
         if card:
             self.cards.append(card)
